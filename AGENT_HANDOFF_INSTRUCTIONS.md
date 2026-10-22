@@ -209,8 +209,10 @@ bash ./publish-github.sh https://github.com/neochaotic/data-ai-presales.git main
 ## 4. Checklist Final de Verificação do Agente (Definition of Done)
 
 Antes de reportar conclusão ao usuário, verifique se todos os itens abaixo são verdadeiros:
-- [ ] Bucket `gs://gemini-demo-qi-retail-kb/manual-operacoes-omnicanal-2026.html` existe e está acessível.
-- [ ] Tabelas `orders_and_inventory_360`, `vendas_historico_analytics` (5.000 linhas) e `estoque_lojas_tempo_real` existem em `gemini-demo-qi.retail_omnicanal`.
-- [ ] Agente em Go responde `{"status":"UP"}` em `http://localhost:8081/healthz` e retorna `AUTO_APPROVED_BY_GO_ADK_AGENT` para `PED-9082` e `ESCALATE_TO_DIRECTOR_IN_GEMINI_ENTERPRISE` para `PED-7721`.
-- [ ] UI do `adk web` carrega o grafo do `qi_enterprise_orchestrator` em `http://localhost:8000`.
-- [ ] Código-fonte e documentação sincronizados no repositório GitHub `https://github.com/neochaotic/data-ai-presales`.
+- [x] Bucket `gs://gemini-demo-qi-retail-kb/manual-operacoes-omnicanal-2026.html` existe e está acessível.
+- [x] Tabelas `orders_and_inventory_360`, `vendas_historico_analytics` (5.000 linhas) e `estoque_lojas_tempo_real` existem em `gemini-demo-qi.retail_omnicanal`.
+- [x] Data Stores `retail-politicas-kb` (GCS) e `retail-vendas-bq-ds` (BigQuery) criados e vinculados ao App Gemini Enterprise `alisson-demo_1792679266221`.
+- [x] Agente em Go responde `{"status":"UP"}` em `http://localhost:8081/healthz` e retorna `AUTO_APPROVED_BY_GO_ADK_AGENT` para `PED-9082` e `ESCALATE_TO_DIRECTOR_IN_GEMINI_ENTERPRISE` para `PED-7721`.
+- [x] UI do `adk web` carrega o grafo do `qi_enterprise_orchestrator` em `http://localhost:8000`.
+- [x] Orquestrador publicado no Vertex AI Agent Engine (`projects/301410925901/locations/us-central1/reasoningEngines/4489416202250092544`).
+- [x] Código-fonte, regras de FinOps (`.geminirules`) e documentação sincronizados no repositório GitHub `https://github.com/neochaotic/data-ai-presales`.

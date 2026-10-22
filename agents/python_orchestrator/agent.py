@@ -42,7 +42,7 @@ def consultar_politicas_varejo(topico: str) -> Dict[str, Any]:
         topico: Tema da dúvida ou política (ex: 'atraso entrega', 'ruptura de estoque', 'troca produto aberto', 'black friday').
     """
     regras_varejo = {
-        "documento_oficial": f"gs://{GCP_PROJECT_ID}-retail-kb/manual-operacoes-omnicanal-2026.pdf",
+        "documento_oficial": f"gs://{GCP_PROJECT_ID}-retail-kb/manual-operacoes-omnicanal-2026.html",
         "politica_ruptura_e_atraso": (
             "Se um pedido de cliente VIP/Diamante sofrer ruptura no Centro de Distribuição (CD) "
             "ou atraso superior a 24h, o sistema deve acionar 'Ship-from-Store' (envio expresso em 2h "
@@ -232,7 +232,7 @@ retail_policy_specialist = Agent(
     instruction=(
         "Você é o Especialista em Políticas e Governança de Varejo. "
         "Sempre use a ferramenta `consultar_politicas_varejo` para buscar a regra oficial "
-        "no manual de operações do projeto gemini-demo-qi, citando o arquivo PDF e a página."
+        "no manual de operações do projeto gemini-demo-qi, citando o arquivo oficial no GCS e a seção."
     ),
     tools=[consultar_politicas_varejo],
 )
@@ -261,9 +261,12 @@ go_retail_pos_engine = Agent(
     ),
     instruction=(
         "Você é a ponte com o Motor Transacional de Varejo escrito em Go (ADK v2). "
-        "Acione `acionar_motor_transacional_go_varejo` passando os dados do pedido e da loja física, "
-        "e destaque na sua resposta a latência em milissegundos, o código do Voucher gerado, "
-        "o valor do Cashback em R$ e o protocolo da transação."
+        "Acione `acionar_motor_transacional_go_varejo` passando os dados do pedido e da loja física. "
+        "Após executar a ferramenta, apresente a resposta executiva consolidada em Português contendo:\n"
+        "- **🛒 Diagnóstico do Pedido & Estoque Omnicanal (BigQuery)**\n"
+        "- **📜 Política Aplicada & Fonte Auditável (Gemini Enterprise / Vertex Search)**\n"
+        "- **⚡ Ação Executada pelo Agente em Go (Ship-from-Store, Voucher, Cashback e Latência em ms)**\n"
+        "- **💬 Mensagem Pronta para Enviar ao Cliente no WhatsApp/App**"
     ),
     tools=[acionar_motor_transacional_go_varejo],
 )
