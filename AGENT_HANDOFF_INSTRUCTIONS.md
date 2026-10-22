@@ -141,14 +141,16 @@ curl -X POST \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json" \
   -H "X-Goog-User-Project: ${PROJECT_ID}" \
-  "https://discoveryengine.googleapis.com/v1alpha/projects/${PROJECT_ID}/locations/global/collections/default_collection/dataStores/qi-retail-vendas-bq-ds/branches/0/documents:import" \
+  "https://discoveryengine.googleapis.com/v1/projects/${PROJECT_ID}/locations/global/collections/default_collection/dataStores/retail-vendas-bq-ds/branches/default_branch/documents:import" \
   -d '{
     "bigquerySource": {
       "projectId": "gemini-demo-qi",
       "datasetId": "retail_omnicanal",
       "tableId": "orders_and_inventory_360",
       "dataSchema": "custom"
-    }
+    },
+    "autoGenerateIds": true,
+    "reconciliationMode": "INCREMENTAL"
   }'
 ```
 
