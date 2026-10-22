@@ -1,0 +1,15 @@
+# Diretrizes e Restrições de Custos de Cloud (GCP)
+
+## RESTRIÇÃO CRÍTICA DE CUSTOS (FinOps & Safety)
+Para qualquer demonstração, desenvolvimento ou teste neste ambiente:
+1. **PROIBIDO CRIAR RECURSOS COM CUSTO CONTÍNUO/DEDICADO FIXO**:
+   - **NUNCA** provisionar **Vertex AI Vector Search Indexes / Index Endpoints** dedicados (custam máquinas rodando 24/7).
+   - **NUNCA** provisionar **Vertex AI Dedicated Model Serving Endpoints** (ex: instâncias n1/a2 dedicadas para inferência contínua).
+   - **NUNCA** alocar **BigQuery BI Engine Reservations** ou slots dedicados contratados (use estritamente o modo serverless / on-demand padrão).
+   - **NUNCA** provisionar clusters de **GKE (Google Kubernetes Engine)** ou VMs Compute Engine desnecessárias.
+2. **PRIORIZAR SEMPRE ARQUITETURA SERVERLESS E FREE-TIER**:
+   - **Vertex AI Agent Engine (Reasoning Engine)** em modo serverless gerenciado por chamada.
+   - **BigQuery Serverless On-Demand** com datasets compactos e sintéticos.
+   - **Cloud Storage Standard** com dados estritamente necessários.
+   - **Execução local de workers/daemons** (ex: microserviços Go, UI do ADK) na máquina do workspace em portas locais sempre que possível.
+3. Se qualquer comando ou deploy exigir serviços pagos com alocação contínua de recursos, **SEMPRE PEÇA CONFIRMAÇÃO EXPLÍCITA DO USUÁRIO** antes de executar.

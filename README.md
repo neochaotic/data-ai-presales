@@ -74,3 +74,20 @@ Este repositório já inclui uma **Skill nativa do Google Antigravity** em `.age
 Antes de entrar em uma call com um cliente, basta abrir o **Antigravity** e digitar no chat:
 
 > *"Use a skill presales-customizer para adaptar os nossos casos genéricos, prompts do ADK e minuta de proposta para um cliente do setor de **[Varejo / Saúde / Financeiro / Manufatura]** focado em **[ Atendimento / Backoffice / Inteligência Comercial ]**."*
+
+---
+
+## 🛡️ Diretrizes de FinOps e Governança de Custos (Restrições Explícitas)
+
+Este repositório e todas as automações foram desenhados com princípios rígidos de **FinOps e Custo Zero/Quase Nulo**:
+
+- **Proibido provisionar recursos dedicados 24/7**:
+  - ❌ **Sem Vertex AI Vector Search Index Endpoints** (evita custos contínuos de máquinas dedicadas).
+  - ❌ **Sem Vertex AI Model Serving Endpoints** em VMs dedicadas.
+  - ❌ **Sem BigQuery BI Engine Reservations** ou compra de capacidade de slots fixos.
+  - ❌ **Sem Clusters GKE ou VMs Compute Engine** persistentes.
+- **Arquitetura 100% Serverless & On-Demand**:
+  - ✅ **Vertex AI Agent Engine (Reasoning Engine)**: Deploy serverless gerenciado, cobra apenas centavos por chamada executada.
+  - ✅ **BigQuery On-Demand**: Dados sintéticos leves (< 2 MB), dentro do limite gratuito mensal do Google Cloud (10 GB storage / 1 TB queries).
+  - ✅ **Cloud Storage Standard**: 1 arquivo HTML (< 3 KB), custo < R$ 0,01.
+  - ✅ **Execução Híbrida/Local**: Agentes transacionais de alta concorrência (Go) e Dev UI (ADK) rodam localmente no workspace (`localhost:8081` e `localhost:8000`).
